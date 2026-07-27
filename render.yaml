@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: maganda-essentials
+    env: python
+    buildCommand: ./build.sh
+    startCommand: gunicorn maganda.wsgi:application
+    plan: free
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: maganda-db
+          property: connectionString
+      - key: ALLOWED_HOSTS
+        value: "maganda-essentials.onrender.com,www.magandaessentials.com,magandaessentials.com"
+
+databases:
+  - name: maganda-db
+    plan: free

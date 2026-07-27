@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maganda Essentials – Natural Handmade Soap</title>
+  <style>
+    /* ===== RESET & BASE ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: #fcf8f0;
+      color: #2e3b2e;
+      line-height: 1.6;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ===== HEADER / NAV ===== */
+    header {
+      background: #2e3b2e;
+      color: #f5efe6;
+      padding: 18px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .logo span {
+      color: #d4b68a;
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      font-weight: 500;
+    }
+    .nav-links a {
+      color: #f5efe6;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover {
+      color: #d4b68a;
+    }
+    .hamburger {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: linear-gradient(135deg, #e8dfd0 0%, #d4c9b8 100%);
+      padding: 80px 20px;
+      text-align: center;
+      border-radius: 0 0 40px 40px;
+      margin-bottom: 40px;
+    }
+    .hero h1 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      color: #1f2a1f;
+    }
+    .hero h1 span {
+      color: #8b6f47;
+    }
+    .hero p {
+      font-size: 1.3rem;
+      max-width: 700px;
+      margin: 20px auto;
+      color: #2e3b2e;
+    }
+    .hero .tagline {
+      font-style: italic;
+      font-size: 1.1rem;
+      background: rgba(46, 59, 46, 0.08);
+      display: inline-block;
+      padding: 8px 24px;
+      border-radius: 40px;
+      margin-top: 10px;
+    }
+    .btn {
+      display: inline-block;
+      background: #2e3b2e;
+      color: #f5efe6;
+      padding: 14px 42px;
+      border-radius: 40px;
+      font-weight: 600;
+      margin-top: 28px;
+      transition: background 0.3s, transform 0.2s;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: #4a5e4a;
+      transform: translateY(-2px);
+    }
+    .btn-outline {
+      background: transparent;
+      color: #2e3b2e;
+      border: 2px solid #2e3b2e;
+    }
+    .btn-outline:hover {
+      background: #2e3b2e;
+      color: #f5efe6;
+    }
+
+    /* ===== MISSION SNAPSHOT ===== */
+    .mission-snap {
+      background: #ffffffec;
+      padding: 40px 30px;
+      border-radius: 24px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+      margin: 30px 0 50px;
+      border-left: 6px solid #d4b68a;
+    }
+    .mission-snap h2 {
+      font-size: 1.8rem;
+      color: #1f2a1f;
+    }
+    .mission-snap p {
+      font-size: 1.1rem;
+      margin-top: 12px;
+    }
+
+    /* ===== PRODUCTS PREVIEW ===== */
+    .section-title {
+      font-size: 2.2rem;
+      text-align: center;
+      margin: 50px 0 20px;
+      color: #1f2a1f;
+    }
+    .section-sub {
+      text-align: center;
+      color: #5a6e5a;
+      margin-bottom: 40px;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    .product-card {
+      background: white;
+      border-radius: 20px;
+      padding: 24px 20px 28px;
+      text-align: center;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+      transition: transform 0.25s, box-shadow 0.25s;
+      border: 1px solid #eee6da;
+    }
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 40px rgba(0,0,0,0.07);
+    }
+    .product-card .soap-icon {
+      font-size: 3.6rem;
+      display: block;
+      margin-bottom: 10px;
+    }
+    .product-card h3 {
+      font-size: 1.3rem;
+      color: #1f2a1f;
+    }
+    .product-card .price {
+      font-weight: 600;
+      color: #8b6f47;
+      margin: 8px 0;
+    }
+    .product-card .badge {
+      background: #d4b68a33;
+      padding: 4px 14px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      color: #5a4a2e;
+      display: inline-block;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #2e3b2e;
+      color: #d4cdc0;
+      padding: 40px 0 20px;
+      margin-top: 60px;
+      border-radius: 40px 40px 0 0;
+    }
+    footer .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+    footer h4 {
+      color: #f5efe6;
+      margin-bottom: 12px;
+    }
+    footer a {
+      display: block;
+      color: #d4cdc0;
+      margin: 4px 0;
+      transition: color 0.3s;
+    }
+    footer a:hover {
+      color: #d4b68a;
+    }
+    footer .bottom {
+      border-top: 1px solid #4a5e4a;
+      padding-top: 20px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+        padding: 20px 0 10px;
+      }
+      .nav-links.open {
+        display: flex;
+      }
+      .hamburger {
+        display: block;
+      }
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      .hero p {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ===== HEADER ===== -->
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">Maganda<span>Essentials</span></div>
+        <div class="hamburger" onclick="this.nextElementSibling.classList.toggle('open')">☰</div>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="#shop">Shop</a>
+          <a href="about.html">About / Contact</a>
+          <a href="#footer">Policies</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="container">
+      <h1>Peace & Blessings,<br><span>You Belong Here</span></h1>
+      <p>Handmade, all-natural soaps & essentials — crafted with love, intention, and zero shortcuts.</p>
+      <div class="tagline">🌿 Black-owned · Woman-owned · Family-operated · GA</div>
+      <div>
+        <a href="#shop" class="btn">Shop Bar Soaps</a>
+        <a href="about.html" class="btn btn-outline" style="margin-left:12px;">Our Story</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <!-- ===== MISSION SNAPSHOT ===== -->
+    <div class="mission-snap">
+      <h2>🌱 More Than Just Soap</h2>
+      <p>We're on a mission to spread positivity and raise awareness about harmful chemicals in beauty products. 
+      Every bar is made with natural, locally-sourced ingredients — tested by real people (ages 2 to 70!) through every season. 
+      <strong>No animals tested. No shortcuts. Just love.</strong></p>
+    </div>
+
+    <!-- ===== PRODUCTS PREVIEW ===== -->
+    <h2 class="section-title" id="shop">✨ Currently Available</h2>
+    <p class="section-sub">Scented & Unscented Bar Soaps — more coming soon!</p>
+
+    <div class="product-grid">
+      <div class="product-card">
+        <span class="soap-icon">🌺</span>
+        <h3>Rose & Lavender</h3>
+        <p class="price">$12.00</p>
+        <span class="badge">Scented</span>
+        <p style="margin-top:10px; font-size:0.9rem; color:#5a6e5a;">Calming, floral, naturally soothing.</p>
+      </div>
+      <div class="product-card">
+        <span class="soap-icon">🍊</span>
+        <h3>Citrus Burst</h3>
+        <p class="price">$12.00</p>
+        <span class="badge">Scented</span>
+        <p style="margin-top:10px; font-size:0.9rem; color:#5a6e5a;">Bright, energizing, pure essential oils.</p>
+      </div>
+      <div class="product-card">
+        <span class="soap-icon">🧼</span>
+        <h3>Unscented Gentle</h3>
+        <p class="price">$10.00</p>
+        <span class="badge">Unscented</span>
+        <p style="margin-top:10px; font-size:0.9rem; color:#5a6e5a;">For sensitive skin — zero fragrance, all care.</p>
+      </div>
+      <div class="product-card">
+        <span class="soap-icon">🌿</span>
+        <h3>Hemp & Oatmeal</h3>
+        <p class="price">$13.00</p>
+        <span class="badge">Scented</span>
+        <p style="margin-top:10px; font-size:0.9rem; color:#5a6e5a;">Exfoliating, nourishing, earthy.</p>
+      </div>
+    </div>
+    <div style="text-align:center; margin:20px 0 40px;">
+      <p style="color:#5a6e5a;">🧴 Liquid soaps · Hand sanitizers · Hair oils — <em>coming soon!</em></p>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>Maganda Essentials</h4>
+          <p style="font-size:0.95rem;">Handmade with intention • Metro Atlanta, GA</p>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <a href="index.html">Home</a>
+          <a href="#shop">Shop</a>
+          <a href="about.html">About / Contact</a>
+        </div>
+        <div>
+          <h4>Policies</h4>
+          <a href="terms.html">Terms & Conditions</a>
+          <a href="shipping.html">Shipping Policy</a>
+          <a href="returns.html">Returns & Refunds</a>
+        </div>
+        <div>
+          <h4>Connect</h4>
+          <a href="mailto:magandaessentials@gmail.com">✉️ magandaessentials@gmail.com</a>
+          <a href="#">📸 Instagram (coming)</a>
+          <a href="#">📘 Facebook (coming)</a>
+        </div>
+      </div>
+      <div class="bottom">
+        &copy; 2026 Maganda Essentials — All rights reserved. Made with love &amp; shea butter.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Simple hamburger toggle (no conflict)
+    document.querySelector('.hamburger').addEventListener('click', function(e) {
+      e.stopPropagation();
+      document.querySelector('.nav-links').classList.toggle('open');
+    });
+  </script>
+</body>
+</html>
