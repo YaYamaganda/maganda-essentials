@@ -15,7 +15,9 @@
         <div class="container">
             <nav>
                 <div class="logo">
-                    <a href="/">Maganda<span>Essentials</span></a>
+                    <a href="/">
+                        <img src="{% static 'images/logo.png' %}" alt="Maganda Essentials" class="logo-image">
+                    </a>
                 </div>
                 <div class="nav-links">
                     <a href="/">Home</a>
@@ -212,6 +214,50 @@
                 display: block;
             }
         }
+
+        /* ===== LOGO STYLES ===== */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #f5efe6;
+}
+
+.logo-image {
+    max-height: 50px;
+    width: auto;
+    height: auto;
+    display: block;
+}
+
+.logo-text {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #f5efe6;
+}
+
+.logo-text span {
+    color: #d4b68a;
+}
+
+/* For larger screens */
+@media (min-width: 768px) {
+    .logo-image {
+        max-height: 60px;
+    }
+}
+
+/* For smaller screens */
+@media (max-width: 480px) {
+    .logo-image {
+        max-height: 40px;
+    }
+}
     </style>
 
     <!-- JavaScript -->
