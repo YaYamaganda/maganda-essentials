@@ -16,7 +16,11 @@
             <nav>
                 <div class="logo">
                     <a href="/">
-                        <img src="{% static 'images/logo.png' %}" alt="Maganda Essentials" class="logo-image">
+                        <img src="{% static 'images/logo.png' %}" 
+                            alt="Maganda Essentials" 
+                            class="logo-image"
+                            width="200"
+                            height="60">
                     </a>
                 </div>
                 <div class="nav-links">
@@ -121,17 +125,6 @@
             align-items: center;
             flex-wrap: wrap;
         }
-        .logo {
-            font-size: 1.6rem;
-            font-weight: 700;
-        }
-        .logo a {
-            color: #f5efe6;
-            text-decoration: none;
-        }
-        .logo span {
-            color: #d4b68a;
-        }
         .nav-links {
             display: flex;
             gap: 28px;
@@ -216,48 +209,44 @@
         }
 
         /* ===== LOGO STYLES ===== */
-.logo {
-    display: flex;
-    align-items: center;
-}
+            .logo {
+                display: flex;
+                align-items: center;
+            }
 
-.logo a {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: #f5efe6;
-}
+            .logo a {
+                display: flex;
+                align-items: center;
+                text-decoration: none;
+            }
 
-.logo-image {
-    max-height: 50px;
-    width: auto;
-    height: auto;
-    display: block;
-}
+            .logo-image {
+                max-height: 60px;
+                width: auto;
+                height: auto;
+                display: block;
+            }
 
-.logo-text {
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: #f5efe6;
-}
+            /* Fallback if image doesn't load */
+            .logo-image::after {
+                content: "Maganda Essentials";
+                font-size: 1.6rem;
+                font-weight: 700;
+                color: #f5efe6;
+            }
 
-.logo-text span {
-    color: #d4b68a;
-}
+            /* Mobile responsive */
+            @media (max-width: 768px) {
+                .logo-image {
+                    max-height: 40px;
+                }
+            }
 
-/* For larger screens */
-@media (min-width: 768px) {
-    .logo-image {
-        max-height: 60px;
-    }
-}
-
-/* For smaller screens */
-@media (max-width: 480px) {
-    .logo-image {
-        max-height: 40px;
-    }
-}
+            @media (max-width: 480px) {
+                .logo-image {
+                    max-height: 30px;
+                }
+            }
     </style>
 
     <!-- JavaScript -->
