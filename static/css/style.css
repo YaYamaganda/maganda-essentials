@@ -1,28 +1,19 @@
 /* =========================================================
    MAGANDA ESSENTIALS — GLOBAL STYLES
 ========================================================= */
-
 :root {
     --brand-green: #00e600;
     --brand-green-dark: #00b800;
-    --brand-green-soft: #eaffea;
+    --brand-green-soft: #e9ffe8;
 
     --brand-black: #080808;
-    --brand-charcoal: #1c1c1c;
-    --brand-gray: #6e6e6e;
-    --brand-silver: #c8c8c8;
+    --brand-charcoal: #202020;
+    --brand-silver: #c7c7c7;
 
     --brand-white: #ffffff;
-    --brand-off-white: #f8f8f5;
-    --brand-border: #dedede;
-
-    --container-width: 1280px;
-    --header-height: 118px;
-
-    --shadow-small: 0 4px 14px rgba(0, 0, 0, 0.12);
-    --shadow-medium: 0 10px 30px rgba(0, 0, 0, 0.14);
-
-    --transition: 0.25s ease;
+    --brand-off-white: #f7f7f4;
+    --brand-light-gray: #eeeeee;
+    --brand-border: #dddddd;
 }
 
 
@@ -103,24 +94,35 @@ img {
 .logo {
     display: flex;
     align-items: center;
-    flex: 0 0 auto;
+    flex-shrink: 0;
 }
 
 .logo a {
     display: flex;
     align-items: center;
     line-height: 0;
-    text-decoration: none;
 }
 
 .logo-image {
     display: block;
-
-    width: auto;
-    height: 100px;
-    max-width: 360px;
-
+    width: 320px;
+    height: auto;
+    max-height: 105px;
     object-fit: contain;
+}
+
+@media (max-width: 768px) {
+    .logo-image {
+        width: 250px;
+        max-height: 82px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-image {
+        width: 205px;
+        max-height: 68px;
+    }
 }
 
 
@@ -440,4 +442,243 @@ main {
     background: var(--brand-black);
     color: var(--brand-white);
     border-color: var(--brand-black);
+}
+
+/* =========================================================
+   MAGANDA BRAND COLOR OVERRIDES
+   Keep this at the bottom of style.css
+========================================================= */
+
+/* Page background */
+
+body {
+    background: var(--brand-off-white);
+    color: var(--brand-charcoal);
+}
+
+
+/* Header */
+
+.site-header,
+header {
+    background: var(--brand-black);
+    color: var(--brand-white);
+    border-bottom: 3px solid var(--brand-green);
+}
+
+.nav-links a {
+    color: var(--brand-white);
+}
+
+.nav-links a:hover,
+.nav-links a:focus {
+    color: var(--brand-green);
+}
+
+
+/* Cart count */
+
+.cart-count {
+    background: var(--brand-green);
+    color: var(--brand-black);
+}
+
+
+/* Checkout button */
+
+.checkout-button,
+.cart-icon {
+    background: var(--brand-green);
+    color: var(--brand-black) !important;
+    border: 2px solid var(--brand-green);
+}
+
+.checkout-button:hover,
+.cart-icon:hover {
+    background: var(--brand-white);
+    color: var(--brand-black) !important;
+    border-color: var(--brand-white);
+}
+
+
+/* Hero section */
+
+.hero {
+    background:
+        linear-gradient(
+            135deg,
+            var(--brand-off-white) 0%,
+            var(--brand-green-soft) 100%
+        );
+}
+
+.hero-badge {
+    background: rgba(0, 230, 0, 0.12);
+    color: var(--brand-black);
+    border: 1px solid rgba(0, 230, 0, 0.35);
+}
+
+.hero-content h1 {
+    color: var(--brand-black);
+}
+
+.hero-content h1 span {
+    color: var(--brand-green-dark);
+}
+
+.hero-description {
+    color: var(--brand-charcoal);
+}
+
+
+/* Primary buttons */
+
+.btn-primary,
+.btn-add-home,
+.btn-learn-more,
+.newsletter-form-home button {
+    background: var(--brand-green);
+    color: var(--brand-black);
+    border: 2px solid var(--brand-green);
+}
+
+.btn-primary:hover,
+.btn-add-home:hover,
+.btn-learn-more:hover,
+.newsletter-form-home button:hover {
+    background: var(--brand-black);
+    color: var(--brand-white);
+    border-color: var(--brand-black);
+}
+
+
+/* Secondary buttons */
+
+.btn-secondary,
+.btn-view-all {
+    background: transparent;
+    color: var(--brand-black);
+    border: 2px solid var(--brand-green);
+}
+
+.btn-secondary:hover,
+.btn-view-all:hover {
+    background: var(--brand-black);
+    color: var(--brand-white);
+    border-color: var(--brand-black);
+}
+
+
+/* Product cards */
+
+.product-card-home,
+.testimonial-card {
+    background: var(--brand-white);
+    border: 1px solid var(--brand-border);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.product-card-home:hover,
+.testimonial-card:hover {
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.14);
+}
+
+.product-image-home {
+    background: var(--brand-off-white);
+}
+
+.product-info-home h3,
+.section-header h2 {
+    color: var(--brand-black);
+}
+
+.product-short-desc,
+.section-subtitle {
+    color: #666666;
+}
+
+
+/* Mission section */
+
+.mission-section {
+    background: var(--brand-white);
+}
+
+.mission-tag {
+    background: rgba(0, 230, 0, 0.13);
+    color: var(--brand-green-dark);
+}
+
+.mission-content h2 {
+    color: var(--brand-black);
+}
+
+.mission-highlight {
+    background: var(--brand-green-soft);
+    border-left: 4px solid var(--brand-green);
+    color: var(--brand-charcoal);
+}
+
+.mission-visual-content {
+    background: var(--brand-off-white);
+    border-color: var(--brand-silver);
+}
+
+
+/* Newsletter */
+
+.newsletter-section-home {
+    background:
+        linear-gradient(
+            135deg,
+            var(--brand-black),
+            #173317
+        );
+}
+
+.newsletter-content-home h2,
+.newsletter-content-home p {
+    color: var(--brand-white);
+}
+
+.newsletter-note {
+    color: var(--brand-silver) !important;
+}
+
+
+/* Footer */
+
+.site-footer,
+footer {
+    background: var(--brand-black);
+    color: var(--brand-silver);
+    border-top: 3px solid var(--brand-green);
+}
+
+footer h4 {
+    color: var(--brand-white);
+}
+
+footer a {
+    color: var(--brand-silver);
+}
+
+footer a:hover {
+    color: var(--brand-green);
+}
+
+.footer-bottom,
+footer .bottom {
+    border-top-color: rgba(255, 255, 255, 0.18);
+}
+
+
+/* Form focus colors */
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--brand-green);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 230, 0, 0.15);
 }
