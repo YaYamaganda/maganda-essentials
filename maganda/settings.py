@@ -151,12 +151,10 @@ DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'maganda-essentials.onrender.com',
-    'www.magandaessentials.com',
-    'magandaessentials.com',
+    '.onrender.com',  # Allow all Render subdomains
 ]
 
-# Database (Render provides PostgreSQL)
+# Database
 if os.environ.get('DATABASE_URL'):
     DATABASES = {
         'default': dj_database_url.config(
