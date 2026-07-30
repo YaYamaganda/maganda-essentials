@@ -1,35 +1,84 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Maganda Essentials – Natural Handmade Soap{% endblock %}</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="icon" href="{% static 'images/favicon.ico' %}">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {% block title %}
+            Maganda Essentials – Natural Handmade Soap
+        {% endblock %}
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/style.css' %}"
+    >
+
+    <link
+        rel="icon"
+        href="{% static 'images/favicon.ico' %}"
+    >
+
     {% block extra_head %}{% endblock %}
 </head>
+
 <body>
-    <!-- Header -->
-    <header>
+
+    <!-- ==================================================
+         HEADER
+    =================================================== -->
+    <header class="site-header">
         <div class="container">
-            <nav>
+            <nav class="site-nav">
+
                 <div class="logo">
-                    <a href="/">
+                    <a href="/" aria-label="Maganda Essentials home">
                         <img
-                        src="{% static 'images/maganda-logo.png' %}"
-                        alt="Maganda Essentials"
-                        class="logo-image"
-                    >
+                            src="{% static 'images/maganda-logo.png' %}"
+                            alt="Maganda Essentials"
+                            class="logo-image"
+                        >
                     </a>
                 </div>
-                <div class="nav-links">
+
+                <button
+                    type="button"
+                    class="hamburger"
+                    id="menu-toggle"
+                    aria-label="Open navigation menu"
+                    aria-expanded="false"
+                    aria-controls="main-navigation"
+                >
+                    ☰
+                </button>
+
+                <div
+                    class="nav-links"
+                    id="main-navigation"
+                >
                     <a href="/">Home</a>
-                    <a href="{% url 'products:product_list' %}">Shop</a>
-                    <a href="/about/">About</a>
-                    <!-- 👇 ADD THIS CART LINK -->
-                    <a href="{% url 'cart:cart_detail' %}" class="cart-link">
-                        🛒 Cart 
+
+                    <a href="{% url 'products:product_list' %}">
+                        Shop
+                    </a>
+
+                    <a href="/about/">
+                        About
+                    </a>
+
+                    <a
+                        href="{% url 'cart:cart_detail' %}"
+                        class="cart-link"
+                    >
+                        🛒 Cart
+
                         <span class="cart-count">
                             {% if request.session.cart_count %}
                                 {{ request.session.cart_count }}
@@ -38,221 +87,129 @@
                             {% endif %}
                         </span>
                     </a>
-                    <!-- 👆 ADD THIS CART LINK -->
-                    <a href="#" class="snipcart-checkout cart-icon">
-                        🛒 Checkout
+
+                    <a
+                        href="#"
+                        class="snipcart-checkout checkout-button"
+                    >
+                        Checkout
                     </a>
                 </div>
-                <div class="hamburger" onclick="this.classList.toggle('active'); document.querySelector('.nav-links').classList.toggle('open')">
-                    ☰
-                </div>
+
             </nav>
         </div>
     </header>
 
-    <!-- Main Content -->
+
+    <!-- ==================================================
+         MAIN CONTENT
+    =================================================== -->
     <main>
         {% block content %}
         {% endblock %}
     </main>
 
-    <!-- Footer -->
-    <footer>
+
+    <!-- ==================================================
+         FOOTER
+    =================================================== -->
+    <footer class="site-footer">
         <div class="container">
+
             <div class="footer-grid">
-                <div>
+
+                <div class="footer-column">
                     <h4>Maganda Essentials</h4>
-                    <p>Handmade with intention • Metro Atlanta, GA</p>
-                    <p>🌿 Black-owned · Woman-owned · Family-operated</p>
+
+                    <p>
+                        Handmade with intention • Metro Atlanta, GA
+                    </p>
+
+                    <p>
+                        🌿 Black-owned · Woman-owned · Family-operated
+                    </p>
                 </div>
-                <div>
+
+                <div class="footer-column">
                     <h4>Quick Links</h4>
+
                     <a href="/">Home</a>
-                    <a href="{% url 'products:product_list' %}">Shop</a>
-                    <a href="{% url 'about' %}">About</a>
+
+                    <a href="{% url 'products:product_list' %}">
+                        Shop
+                    </a>
+
+                    <a href="/about/">
+                        About
+                    </a>
                 </div>
-                <div>
+
+                <div class="footer-column">
                     <h4>Policies</h4>
-                    <a href="/terms/">Terms & Conditions</a>
-                    <a href="/shipping/">Shipping Policy</a>
-                    <a href="/returns/">Returns & Refunds</a>
+
+                    <a href="/terms/">
+                        Terms &amp; Conditions
+                    </a>
+
+                    <a href="/shipping/">
+                        Shipping Policy
+                    </a>
+
+                    <a href="/returns/">
+                        Returns &amp; Refunds
+                    </a>
                 </div>
-                <div>
+
+                <div class="footer-column">
                     <h4>Connect</h4>
-                    <a href="mailto:magandaessentials@gmail.com">✉️ magandaessentials@gmail.com</a>
-                    <a href="#">📸 Instagram</a>
-                    <a href="#">📘 Facebook</a>
+
+                    <a href="mailto:magandaessentials@gmail.com">
+                        ✉️ magandaessentials@gmail.com
+                    </a>
+
+                    <a href="#">
+                        📸 Instagram
+                    </a>
+
+                    <a href="#">
+                        📘 Facebook
+                    </a>
                 </div>
+
             </div>
-            <div class="bottom">
+
+            <div class="footer-bottom">
                 &copy; 2026 Maganda Essentials — All rights reserved.
             </div>
+
         </div>
     </footer>
 
-    <!-- Global CSS -->
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #fcf8f0;
-            color: #2e3b2e;
-            line-height: 1.6;
-        }
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Header */
-        header {
-            background: #2e3b2e;
-            color: #f5efe6;
-            padding: 16px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.15);
-        }
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        .nav-links {
-            display: flex;
-            gap: 28px;
-            align-items: center;
-        }
-        .nav-links a {
-            color: #f5efe6;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        .nav-links a:hover {
-            color: #d4b68a;
-        }
-        .cart-icon {
-            background: #d4b68a;
-            color: #2e3b2e;
-            padding: 6px 16px;
-            border-radius: 30px;
-            font-weight: 600;
-            text-decoration: none;
-        }
-        .cart-icon:hover {
-            background: #c4a67a;
-            color: #2e3b2e;
-        }
-        .hamburger {
-            display: none;
-            font-size: 1.8rem;
-            cursor: pointer;
-        }
-        
-        /* Footer */
-        footer {
-            background: #2e3b2e;
-            color: #d4cdc0;
-            padding: 40px 0 20px;
-            margin-top: 40px;
-        }
-        footer .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-        footer h4 {
-            color: #f5efe6;
-            margin-bottom: 12px;
-        }
-        footer a {
-            color: #d4cdc0;
-            text-decoration: none;
-            display: block;
-            margin: 4px 0;
-            transition: color 0.3s;
-        }
-        footer a:hover {
-            color: #d4b68a;
-        }
-        footer .bottom {
-            border-top: 1px solid #4a5e4a;
-            padding-top: 20px;
-            text-align: center;
-            font-size: 0.9rem;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                gap: 12px;
-                padding: 20px 0 10px;
-            }
-            .nav-links.open {
-                display: flex;
-            }
-            .hamburger {
-                display: block;
-            }
-        }
 
-        /* ===== LOGO STYLES ===== */
-            .logo {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-}
-
-.logo a {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    line-height: 0;
-}
-
-.logo-image {
-    height: 50px;
-    width: auto;
-    max-width: 200px;
-    display: block;
-    object-fit: contain;
-}
-
-@media (max-width: 768px) {
-    .logo-image {
-        height: 40px;
-        max-width: 160px;
-    }
-}
-
-@media (max-width: 480px) {
-    .logo-image {
-        height: 32px;
-        max-width: 130px;
-    }
-}
-    </style>
-
-    <!-- JavaScript -->
+    <!-- ==================================================
+         GLOBAL JAVASCRIPT
+    =================================================== -->
     <script>
-        // Hamburger menu
-        document.querySelector('.hamburger')?.addEventListener('click', function() {
-            document.querySelector('.nav-links').classList.toggle('open');
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuToggle = document.getElementById("menu-toggle");
+            const navigation = document.getElementById("main-navigation");
+
+            if (!menuToggle || !navigation) {
+                return;
+            }
+
+            menuToggle.addEventListener("click", function () {
+                const menuIsOpen = navigation.classList.toggle("open");
+
+                menuToggle.classList.toggle("active", menuIsOpen);
+                menuToggle.setAttribute(
+                    "aria-expanded",
+                    menuIsOpen ? "true" : "false"
+                );
+            });
         });
     </script>
-    
+
     {% block extra_js %}{% endblock %}
 </body>
 </html>

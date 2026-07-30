@@ -1,105 +1,109 @@
-/* ===== MAGANDA ESSENTIALS - MAIN STYLES ===== */
+/* =========================================================
+   MAGANDA ESSENTIALS — GLOBAL STYLES
+========================================================= */
 
-/* Reset & Base */
-* {
+:root {
+    --brand-green: #00e600;
+    --brand-green-dark: #00b800;
+    --brand-green-soft: #eaffea;
+
+    --brand-black: #080808;
+    --brand-charcoal: #1c1c1c;
+    --brand-gray: #6e6e6e;
+    --brand-silver: #c8c8c8;
+
+    --brand-white: #ffffff;
+    --brand-off-white: #f8f8f5;
+    --brand-border: #dedede;
+
+    --container-width: 1280px;
+    --header-height: 118px;
+
+    --shadow-small: 0 4px 14px rgba(0, 0, 0, 0.12);
+    --shadow-medium: 0 10px 30px rgba(0, 0, 0, 0.14);
+
+    --transition: 0.25s ease;
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #fcf8f0;
-    color: #2e3b2e;
+    min-height: 100vh;
+    font-family:
+        "Segoe UI",
+        Tahoma,
+        Geneva,
+        Verdana,
+        sans-serif;
+
+    background: var(--brand-off-white);
+    color: var(--brand-charcoal);
     line-height: 1.6;
 }
 
-.container {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 20px;
+img {
+    max-width: 100%;
 }
 
-/* Header */
-header {
-    background: #2e3b2e;
-    color: #f5efe6;
-    padding: 16px 0;
+
+/* =========================================================
+   SHARED CONTAINER
+========================================================= */
+
+.container {
+    width: min(100% - 40px, var(--container-width));
+    margin-inline: auto;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.site-header {
     position: sticky;
     top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.15);
+    z-index: 1000;
+
+    min-height: var(--header-height);
+    background: var(--brand-black);
+    border-bottom: 3px solid var(--brand-green);
+    box-shadow: var(--shadow-small);
 }
 
-nav {
+.site-nav {
+    min-height: var(--header-height);
+
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.nav-links {
-    display: flex;
-    gap: 28px;
-    align-items: center;
-}
-
-.nav-links a {
-    color: #f5efe6;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s;
-}
-
-.nav-links a:hover {
-    color: #d4b68a;
-}
-
-/* Footer */
-footer {
-    background: #2e3b2e;
-    color: #d4cdc0;
-    padding: 40px 0 20px;
-    margin-top: 40px;
-}
-
-footer .footer-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 30px;
-    margin-bottom: 30px;
 }
 
-footer h4 {
-    color: #f5efe6;
-    margin-bottom: 12px;
-}
 
-footer a {
-    color: #d4cdc0;
-    text-decoration: none;
-    display: block;
-    margin: 4px 0;
-    transition: color 0.3s;
-}
-
-footer a:hover {
-    color: #d4b68a;
-}
-
-footer .bottom {
-    border-top: 1px solid #4a5e4a;
-    padding-top: 20px;
-    text-align: center;
-    font-size: 0.9rem;
-}
-
-/* ===== LOGO STYLES ===== */
+/* =========================================================
+   LOGO
+========================================================= */
 
 .logo {
     display: flex;
     align-items: center;
-    flex-shrink: 0;
+    flex: 0 0 auto;
 }
 
 .logo a {
@@ -111,45 +115,329 @@ footer .bottom {
 
 .logo-image {
     display: block;
+
     width: auto;
-    height: 70px;
-    max-width: 260px;
+    height: 100px;
+    max-width: 360px;
+
     object-fit: contain;
 }
 
-@media (max-width: 768px) {
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 26px;
+}
+
+.nav-links a {
+    color: var(--brand-white);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+
+    transition:
+        color var(--transition),
+        background var(--transition),
+        transform var(--transition);
+}
+
+.nav-links a:hover,
+.nav-links a:focus-visible {
+    color: var(--brand-green);
+}
+
+.cart-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.cart-count {
+    min-width: 24px;
+    height: 24px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 7px;
+
+    background: var(--brand-green);
+    color: var(--brand-black);
+
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 800;
+}
+
+.checkout-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px 22px;
+
+    background: var(--brand-green);
+    color: var(--brand-black) !important;
+
+    border: 2px solid var(--brand-green);
+    border-radius: 999px;
+
+    font-weight: 800 !important;
+}
+
+.checkout-button:hover,
+.checkout-button:focus-visible {
+    background: var(--brand-white);
+    border-color: var(--brand-white);
+    color: var(--brand-black) !important;
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   MOBILE MENU BUTTON
+========================================================= */
+
+.hamburger {
+    display: none;
+
+    background: transparent;
+    color: var(--brand-white);
+
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 8px;
+
+    padding: 6px 12px;
+
+    font-size: 1.8rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.hamburger:hover,
+.hamburger:focus-visible {
+    color: var(--brand-green);
+    border-color: var(--brand-green);
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+main {
+    min-height: 60vh;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.site-footer {
+    margin-top: 60px;
+    padding: 50px 0 22px;
+
+    background: var(--brand-black);
+    color: var(--brand-silver);
+
+    border-top: 3px solid var(--brand-green);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 36px;
+
+    margin-bottom: 35px;
+}
+
+.footer-column h4 {
+    margin-bottom: 14px;
+    color: var(--brand-white);
+    font-size: 1.05rem;
+}
+
+.footer-column p {
+    margin-bottom: 7px;
+}
+
+.footer-column a {
+    display: block;
+
+    width: fit-content;
+    margin: 6px 0;
+
+    color: var(--brand-silver);
+    text-decoration: none;
+
+    transition: color var(--transition);
+}
+
+.footer-column a:hover,
+.footer-column a:focus-visible {
+    color: var(--brand-green);
+}
+
+.footer-bottom {
+    padding-top: 22px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    :root {
+        --header-height: 96px;
+    }
+
     .logo-image {
-        height: 55px;
-        max-width: 220px;
+        height: 80px;
+        max-width: 290px;
+    }
+
+    .nav-links {
+        gap: 18px;
+    }
+
+    .footer-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
-@media (max-width: 480px) {
-    .logo-image {
-        height: 45px;
-        max-width: 180px;
-    }
-}
 
-/* Responsive */
+/* =========================================================
+   MOBILE
+========================================================= */
+
 @media (max-width: 768px) {
+
+    :root {
+        --header-height: 84px;
+    }
+
+    .site-nav {
+        position: relative;
+        flex-wrap: wrap;
+    }
+
+    .logo-image {
+        height: 70px;
+        max-width: 250px;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
     .nav-links {
         display: none;
-        flex-direction: column;
+
         width: 100%;
-        gap: 12px;
-        padding: 20px 0 10px;
+
+        flex-direction: column;
+        align-items: stretch;
+        gap: 5px;
+
+        padding: 14px 0 22px;
+
+        border-top: 1px solid rgba(255, 255, 255, 0.16);
     }
+
     .nav-links.open {
         display: flex;
     }
-    .logo-image {
-        max-height: 40px;
+
+    .nav-links a {
+        width: 100%;
+
+        padding: 11px 12px;
+
+        border-radius: 7px;
+        text-align: center;
+    }
+
+    .nav-links a:hover {
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    .cart-link {
+        justify-content: center;
+    }
+
+    .checkout-button {
+        margin-top: 6px;
     }
 }
 
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
 @media (max-width: 480px) {
-    .logo-image {
-        max-height: 30px;
+
+    .container {
+        width: min(100% - 28px, var(--container-width));
     }
+
+    .logo-image {
+        height: 60px;
+        max-width: 210px;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+}
+
+/* =========================================================
+   FINAL BRAND OVERRIDES
+   Keep this section at the bottom of style.css
+========================================================= */
+
+.btn-primary,
+.btn-add-home,
+.btn-learn-more,
+.newsletter-form-home button {
+    background: var(--brand-green);
+    color: var(--brand-black);
+}
+
+.btn-primary:hover,
+.btn-add-home:hover,
+.btn-learn-more:hover,
+.newsletter-form-home button:hover {
+    background: var(--brand-green-dark);
+    color: var(--brand-white);
+}
+
+.btn-secondary,
+.btn-view-all {
+    background: transparent;
+    color: var(--brand-black);
+    border-color: var(--brand-green);
+}
+
+.btn-secondary:hover,
+.btn-view-all:hover {
+    background: var(--brand-black);
+    color: var(--brand-white);
+    border-color: var(--brand-black);
 }
