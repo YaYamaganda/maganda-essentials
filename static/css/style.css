@@ -1,0 +1,131 @@
+/* ===== MAGANDA ESSENTIALS - MAIN STYLES ===== */
+
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #fcf8f0;
+    color: #2e3b2e;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+header {
+    background: #2e3b2e;
+    color: #f5efe6;
+    padding: 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.15);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #f5efe6;
+}
+
+.logo-image {
+    max-height: 60px;
+    width: auto;
+    height: auto;
+}
+
+.nav-links {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+
+.nav-links a {
+    color: #f5efe6;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #d4b68a;
+}
+
+/* Footer */
+footer {
+    background: #2e3b2e;
+    color: #d4cdc0;
+    padding: 40px 0 20px;
+    margin-top: 40px;
+}
+
+footer .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+footer h4 {
+    color: #f5efe6;
+    margin-bottom: 12px;
+}
+
+footer a {
+    color: #d4cdc0;
+    text-decoration: none;
+    display: block;
+    margin: 4px 0;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: #d4b68a;
+}
+
+footer .bottom {
+    border-top: 1px solid #4a5e4a;
+    padding-top: 20px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+        padding: 20px 0 10px;
+    }
+    .nav-links.open {
+        display: flex;
+    }
+    .logo-image {
+        max-height: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-image {
+        max-height: 30px;
+    }
+}
