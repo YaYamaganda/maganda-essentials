@@ -1,0 +1,784 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Secure Checkout - Maganda Essentials
+{% endblock %}
+
+{% block extra_head %}
+<script src="https://js.stripe.com/v3/"></script>
+{% endblock %}
+
+{% block content %}
+
+<section class="checkout-page">
+    <div class="container">
+
+        <div class="checkout-heading">
+            <span class="checkout-eyebrow">
+                🔒 Secure payment
+            </span>
+
+            <h1>Complete Your Order</h1>
+
+            <p>
+                Your payment information is securely collected
+                and processed by Stripe.
+            </p>
+        </div>
+
+        <div
+            id="checkout-message"
+            class="checkout-message"
+            role="alert"
+            hidden
+        ></div>
+
+        <div class="checkout-layout">
+
+            <!-- ==========================================
+                 CUSTOMER AND PAYMENT FORM
+            =========================================== -->
+            <section class="checkout-card">
+
+                <form id="customer-form">
+                    {% csrf_token %}
+
+                    <h2>Contact and Shipping</h2>
+
+                    <div class="checkout-form-grid">
+
+                        <div class="checkout-field full-width">
+                            <label for="email">
+                                Email address *
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                autocomplete="email"
+                                required
+                            >
+                        </div>
+
+                        <div class="checkout-field">
+                            <label for="first_name">
+                                First name *
+                            </label>
+
+                            <input
+                                type="text"
+                                id="first_name"
+                                name="first_name"
+                                autocomplete="given-name"
+                                required
+                            >
+                        </div>
+
+                        <div class="checkout-field">
+                            <label for="last_name">
+                                Last name *
+                            </label>
+
+                            <input
+                                type="text"
+                                id="last_name"
+                                name="last_name"
+                                autocomplete="family-name"
+                                required
+                            >
+                        </div>
+
+                        <div class="checkout-field full-width">
+                            <label for="phone">
+                                Phone
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                autocomplete="tel"
+                            >
+                        </div>
+
+                        <div class="checkout-field full-width">
+                            <label for="address_line1">
+                                Street address *
+                            </label>
+
+                            <input
+                                type="text"
+                                id="address_line1"
+                                name="address_line1"
+                                autocomplete="address-line1"
+                                required
+                            >
+                        </div>
+
+                        <div class="checkout-field full-width">
+                            <label for="address_line2">
+                                Apartment, suite, unit, etc.
+                            </label>
+
+                            <input
+                                type="text"
+                                id="address_line2"
+                                name="address_line2"
+                                autocomplete="address-line2"
+                            >
+                        </div>
+
+                        <div class="checkout-field">
+                            <label for="city">
+                                City *
+                            </label>
+
+                            <input
+                                type="text"
+                                id="city"
+                                name="city"
+                                autocomplete="address-level2"
+                                required
+                            >
+                        </div>
+
+                        <div class="checkout-field">
+                            <label for="state">
+                                State *
+                            </label>
+
+                            <input
+                                type="text"
+                                id="state"
+                                name="state"
+                                autocomplete="address-level1"
+                                required
+                            >
+                        </div>
+
+                        <div class="checkout-field">
+                            <label for="postal_code">
+                                ZIP code *
+                            </label>
+
+                            <input
+                                type="text"
+                                id="postal_code"
+                                name="postal_code"
+                                autocomplete="postal-code"
+                                required
+                            >
+                        </div>
+
+                        <div class="checkout-field">
+                            <label for="country">
+                                Country *
+                            </label>
+
+                            <select
+                                id="country"
+                                name="country"
+                                autocomplete="country"
+                                required
+                            >
+                                <option value="US" selected>
+                                    United States
+                                </option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <button
+                        id="continue-button"
+                        class="checkout-primary-button"
+                        type="submit"
+                    >
+                        Continue to Payment
+                    </button>
+                </form>
+
+
+                <!-- ======================================
+                     STRIPE PAYMENT ELEMENT
+                ======================================= -->
+                <form id="payment-form" hidden>
+
+                    <button
+                        type="button"
+                        id="back-button"
+                        class="checkout-back-button"
+                    >
+                        ← Edit contact information
+                    </button>
+
+                    <h2>Payment</h2>
+
+                    <div id="payment-element"></div>
+
+                    <button
+                        id="pay-button"
+                        class="checkout-primary-button"
+                        type="submit"
+                    >
+                        <span id="pay-button-text">
+                            Pay ${{ total|floatformat:2 }}
+                        </span>
+
+                        <span
+                            id="payment-spinner"
+                            class="payment-spinner"
+                            hidden
+                        ></span>
+                    </button>
+
+                </form>
+
+            </section>
+
+
+            <!-- ==========================================
+                 ORDER SUMMARY
+            =========================================== -->
+            <aside class="checkout-summary">
+
+                <h2>Order Summary</h2>
+
+                {% for item in items %}
+                    <div class="checkout-summary-item">
+
+                        <div class="summary-product">
+                            <strong>
+                                {{ item.product.name }}
+                            </strong>
+
+                            <span>
+                                Quantity: {{ item.quantity }}
+                            </span>
+                        </div>
+
+                        <strong>
+                            ${{ item.get_total|floatformat:2 }}
+                        </strong>
+
+                    </div>
+                {% endfor %}
+
+                <div class="checkout-summary-row">
+                    <span>Subtotal</span>
+
+                    <span>
+                        ${{ subtotal|floatformat:2 }}
+                    </span>
+                </div>
+
+                <div class="checkout-summary-row">
+                    <span>Shipping</span>
+
+                    <span>
+                        {% if shipping == 0 %}
+                            Free
+                        {% else %}
+                            ${{ shipping|floatformat:2 }}
+                        {% endif %}
+                    </span>
+                </div>
+
+                <div class="checkout-summary-row checkout-total">
+                    <span>Total</span>
+
+                    <span>
+                        ${{ total|floatformat:2 }} USD
+                    </span>
+                </div>
+
+                <p class="checkout-secure-note">
+                    🔒 Your card information never touches
+                    the Maganda Essentials server.
+                </p>
+
+            </aside>
+
+        </div>
+    </div>
+</section>
+
+
+<style>
+    .checkout-page {
+        min-height: 70vh;
+        padding: 55px 0 75px;
+        background: #f7f7f4;
+    }
+
+    .checkout-heading {
+        margin-bottom: 32px;
+        text-align: center;
+    }
+
+    .checkout-eyebrow {
+        display: inline-block;
+        margin-bottom: 8px;
+        color: #00b800;
+        font-weight: 800;
+    }
+
+    .checkout-heading h1 {
+        margin-bottom: 8px;
+        color: #080808;
+        font-size: clamp(2rem, 5vw, 3rem);
+    }
+
+    .checkout-heading p {
+        color: #666666;
+    }
+
+    .checkout-layout {
+        display: grid;
+        grid-template-columns:
+            minmax(0, 1.5fr)
+            minmax(300px, 0.8fr);
+        gap: 30px;
+        align-items: start;
+    }
+
+    .checkout-card,
+    .checkout-summary {
+        background: #ffffff;
+        border: 1px solid #dedede;
+        border-top: 4px solid #00e600;
+        border-radius: 18px;
+        box-shadow:
+            0 12px 32px rgba(0, 0, 0, 0.09);
+    }
+
+    .checkout-card {
+        padding: 30px;
+    }
+
+    .checkout-card h2,
+    .checkout-summary h2 {
+        margin-bottom: 22px;
+        color: #080808;
+    }
+
+    .checkout-form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 17px;
+    }
+
+    .checkout-field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .checkout-field.full-width {
+        grid-column: 1 / -1;
+    }
+
+    .checkout-field label {
+        color: #202020;
+        font-weight: 700;
+    }
+
+    .checkout-field input,
+    .checkout-field select {
+        width: 100%;
+        padding: 13px 14px;
+        background: #f7f7f4;
+        border: 1px solid #c8c8c8;
+        border-radius: 9px;
+        font: inherit;
+    }
+
+    .checkout-field input:focus,
+    .checkout-field select:focus {
+        outline: none;
+        background: #ffffff;
+        border-color: #00e600;
+        box-shadow:
+            0 0 0 3px rgba(0, 230, 0, 0.14);
+    }
+
+    .checkout-primary-button {
+        width: 100%;
+        margin-top: 24px;
+        padding: 15px 20px;
+        background: #00e600;
+        color: #080808;
+        border: 2px solid #00e600;
+        border-radius: 10px;
+        font-size: 1.05rem;
+        font-weight: 800;
+        cursor: pointer;
+        transition:
+            background 0.2s ease,
+            color 0.2s ease;
+    }
+
+    .checkout-primary-button:hover {
+        background: #080808;
+        color: #ffffff;
+        border-color: #080808;
+    }
+
+    .checkout-primary-button:disabled {
+        opacity: 0.65;
+        cursor: wait;
+    }
+
+    .checkout-back-button {
+        margin-bottom: 15px;
+        padding: 0;
+        background: transparent;
+        color: #00b800;
+        border: 0;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    #payment-element {
+        padding: 16px;
+        border: 1px solid #dedede;
+        border-radius: 12px;
+    }
+
+    .checkout-summary {
+        position: sticky;
+        top: 135px;
+        padding: 26px;
+    }
+
+    .checkout-summary-item,
+    .checkout-summary-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 13px 0;
+        border-bottom: 1px solid #eeeeee;
+    }
+
+    .summary-product {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .summary-product span {
+        color: #666666;
+        font-size: 0.88rem;
+    }
+
+    .checkout-total {
+        border-bottom: 0;
+        color: #080808;
+        font-size: 1.2rem;
+        font-weight: 800;
+    }
+
+    .checkout-secure-note {
+        margin-top: 18px;
+        color: #666666;
+        text-align: center;
+        font-size: 0.9rem;
+    }
+
+    .checkout-message {
+        max-width: 800px;
+        margin: 0 auto 20px;
+        padding: 14px 18px;
+        background: #fff1f1;
+        color: #8a1f1f;
+        border: 1px solid #e7b5b5;
+        border-radius: 10px;
+    }
+
+    .payment-spinner {
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        border: 3px solid rgba(0, 0, 0, 0.25);
+        border-top-color: #080808;
+        border-radius: 50%;
+        animation: payment-spin 0.7s linear infinite;
+    }
+
+    @keyframes payment-spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    @media (max-width: 850px) {
+        .checkout-layout {
+            grid-template-columns: 1fr;
+        }
+
+        .checkout-summary {
+            position: static;
+            order: -1;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .checkout-card {
+            padding: 20px;
+        }
+
+        .checkout-form-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .checkout-field.full-width {
+            grid-column: auto;
+        }
+    }
+</style>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const publishableKey =
+            "{{ stripe_publishable_key|escapejs }}";
+
+        const messageBox =
+            document.getElementById("checkout-message");
+
+        if (!publishableKey) {
+            messageBox.textContent =
+                "Stripe publishable key is not configured.";
+
+            messageBox.hidden = false;
+            return;
+        }
+
+        const stripe = Stripe(publishableKey);
+
+        const customerForm =
+            document.getElementById("customer-form");
+
+        const paymentForm =
+            document.getElementById("payment-form");
+
+        const continueButton =
+            document.getElementById("continue-button");
+
+        const payButton =
+            document.getElementById("pay-button");
+
+        const payButtonText =
+            document.getElementById("pay-button-text");
+
+        const spinner =
+            document.getElementById("payment-spinner");
+
+        const backButton =
+            document.getElementById("back-button");
+
+        let elements = null;
+        let paymentElement = null;
+
+
+        function showMessage(message) {
+            messageBox.textContent = message;
+            messageBox.hidden = !message;
+
+            if (message) {
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+            }
+        }
+
+
+        function getCsrfToken() {
+            return customerForm
+                .querySelector(
+                    "[name=csrfmiddlewaretoken]"
+                )
+                .value;
+        }
+
+
+        function setPaymentLoading(isLoading) {
+            payButton.disabled = isLoading;
+            payButtonText.hidden = isLoading;
+            spinner.hidden = !isLoading;
+        }
+
+
+        customerForm.addEventListener(
+            "submit",
+            async function (event) {
+                event.preventDefault();
+
+                showMessage("");
+
+                if (!customerForm.reportValidity()) {
+                    return;
+                }
+
+                continueButton.disabled = true;
+                continueButton.textContent =
+                    "Preparing secure payment…";
+
+                const formData =
+                    new FormData(customerForm);
+
+                const payload =
+                    Object.fromEntries(
+                        formData.entries()
+                    );
+
+                delete payload.csrfmiddlewaretoken;
+
+                try {
+                    const response = await fetch(
+                        "{% url 'orders:create_payment_intent' %}",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json",
+
+                                "X-CSRFToken":
+                                    getCsrfToken(),
+
+                                "X-Requested-With":
+                                    "XMLHttpRequest"
+                            },
+
+                            body: JSON.stringify(payload)
+                        }
+                    );
+
+                    const data = await response.json();
+
+                    if (
+                        !response.ok
+                        || !data.success
+                    ) {
+                        throw new Error(
+                            data.error
+                            || "Unable to start checkout."
+                        );
+                    }
+
+                    elements = stripe.elements({
+                        clientSecret:
+                            data.client_secret,
+
+                        appearance: {
+                            theme: "stripe",
+
+                            variables: {
+                                colorPrimary:
+                                    "#00b800",
+
+                                colorBackground:
+                                    "#ffffff",
+
+                                colorText:
+                                    "#202020",
+
+                                colorDanger:
+                                    "#c0392b",
+
+                                borderRadius:
+                                    "9px"
+                            }
+                        }
+                    });
+
+                    paymentElement =
+                        elements.create(
+                            "payment",
+                            {
+                                layout: "tabs"
+                            }
+                        );
+
+                    paymentElement.mount(
+                        "#payment-element"
+                    );
+
+                    paymentForm.dataset.returnUrl =
+                        data.return_url;
+
+                    customerForm.hidden = true;
+                    paymentForm.hidden = false;
+
+                } catch (error) {
+                    showMessage(
+                        error.message
+                        || "Unable to prepare payment."
+                    );
+
+                } finally {
+                    continueButton.disabled = false;
+                    continueButton.textContent =
+                        "Continue to Payment";
+                }
+            }
+        );
+
+
+        backButton.addEventListener(
+            "click",
+            function () {
+                paymentForm.hidden = true;
+                customerForm.hidden = false;
+            }
+        );
+
+
+        paymentForm.addEventListener(
+            "submit",
+            async function (event) {
+                event.preventDefault();
+
+                showMessage("");
+
+                if (!elements) {
+                    showMessage(
+                        "The payment form is not ready."
+                    );
+
+                    return;
+                }
+
+                setPaymentLoading(true);
+
+                const result =
+                    await stripe.confirmPayment({
+                        elements: elements,
+
+                        confirmParams: {
+                            return_url:
+                                paymentForm
+                                    .dataset
+                                    .returnUrl
+                        }
+                    });
+
+                if (result.error) {
+                    showMessage(
+                        result.error.message
+                        || "Payment could not be completed."
+                    );
+
+                    setPaymentLoading(false);
+                }
+            }
+        );
+
+    });
+</script>
+
+{% endblock %}
