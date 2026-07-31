@@ -226,3 +226,47 @@ else:
 # =========================================================
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+
+STRIPE_PUBLISHABLE_KEY = os.environ.get("STRIPE_PUBLISHABLE_KEY", "")
+STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY", "")
+STRIPE_WEBHOOK_SECRET = os.environ.get("STRIPE_WEBHOOK_SECRET", "")
+
+# =========================================================
+# SHIPPING
+# =========================================================
+
+FREE_SHIPPING_THRESHOLD = os.environ.get(
+    "FREE_SHIPPING_THRESHOLD",
+    "50.00",
+)
+
+STANDARD_SHIPPING_FEE = os.environ.get(
+    "STANDARD_SHIPPING_FEE",
+    "6.95",
+)
+
+
+# =========================================================
+# ORDER EMAIL
+# =========================================================
+
+DEFAULT_FROM_EMAIL = os.environ.get(
+    "DEFAULT_FROM_EMAIL",
+    "Maganda Essentials <orders@example.com>",
+)
+
+EMAIL_BACKEND = os.environ.get(
+    "EMAIL_BACKEND",
+    "django.core.mail.backends.console.EmailBackend",
+)
+
+EMAIL_HOST = os.environ.get("EMAIL_HOST", "")
+EMAIL_PORT = int(os.environ.get("EMAIL_PORT", "587"))
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "")
+
+EMAIL_USE_TLS = (
+    os.environ.get("EMAIL_USE_TLS", "True").lower() == "true"
+)

@@ -90,7 +90,9 @@
                 
                 <div class="checkout-actions">
                     <a href="{% url 'products:product_list' %}" class="btn-continue">Continue Shopping</a>
-                    <a href="#" class="btn-checkout snipcart-checkout">Proceed to Checkout</a>
+                    <a href="{% url 'orders:checkout' %}" class="btn-checkout">
+                        Proceed to Secure Checkout
+                    </a>
                 </div>
                 
                 <div class="secure-checkout">
