@@ -165,13 +165,28 @@
         <div class="newsletter-content">
             <h2>🌿 Stay Connected</h2>
             <p>Subscribe to get updates on new products, sales, and natural wellness tips.</p>
-            <p style="color: #5a6e5a; font-style: italic;">Newsletter signup coming soon!</p>
+            <p style="color: #c8c8c8; font-style: italic;">Newsletter signup coming soon!</p>
         </div>
     </div>
 </div>
 
 <!-- CSS -->
 <style>
+
+    :root {
+        --brand-green: #00e600;
+        --brand-green-dark: #00b800;
+        --brand-green-soft: #eaffea;
+        --brand-black: #080808;
+        --brand-charcoal: #202020;
+        --brand-gray: #666666;
+        --brand-silver: #c8c8c8;
+        --brand-white: #ffffff;
+        --brand-off-white: #f7f7f4;
+        --brand-border: #dedede;
+        --brand-shadow: 0 10px 28px rgba(0, 0, 0, 0.10);
+    }
+
     /* ===== BASE STYLES ===== */
     .container {
         max-width: 1280px;
@@ -182,16 +197,20 @@
     /* ===== PAGE HEADER ===== */
     .page-header {
         text-align: center;
-        padding: 40px 0 30px;
+        padding: 48px 20px 34px;
+        margin: 0 0 30px;
+        background: linear-gradient(135deg, var(--brand-black), #173317);
+        border-bottom: 3px solid var(--brand-green);
+        border-radius: 0 0 28px 28px;
     }
     .page-header h1 {
         font-size: 2.8rem;
-        color: #1f2a1f;
+        color: var(--brand-white);
         margin-bottom: 8px;
     }
     .page-header p {
         font-size: 1.2rem;
-        color: #5a6e5a;
+        color: var(--brand-silver);
     }
 
     /* ===== FILTER BAR ===== */
@@ -201,8 +220,10 @@
         align-items: center;
         flex-wrap: wrap;
         gap: 15px;
-        background: #f5efe6;
-        padding: 15px 20px;
+        background: var(--brand-white);
+        padding: 16px 20px;
+        border: 1px solid var(--brand-border);
+        border-top: 3px solid var(--brand-green);
         border-radius: 12px;
         margin-bottom: 30px;
     }
@@ -213,20 +234,20 @@
     }
     .filter-group label {
         font-weight: 600;
-        color: #2e3b2e;
+        color: #080808;
     }
     .filter-group select {
         padding: 8px 16px;
-        border: 2px solid #d4cdc0;
+        border: 2px solid #c8c8c8;
         border-radius: 8px;
         background: white;
         font-size: 0.95rem;
         cursor: pointer;
-        color: #2e3b2e;
+        color: #080808;
     }
     .filter-group select:focus {
         outline: none;
-        border-color: #8b6f47;
+        border-color: #00b800;
     }
 
     /* ===== PRODUCT GRID ===== */
@@ -239,12 +260,12 @@
 
     /* ===== PRODUCT CARD ===== */
     .product-card {
-        background: white;
+        background: var(--brand-white);
         border-radius: 16px;
         overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        box-shadow: var(--brand-shadow);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
-        border: 1px solid #eee6da;
+        border: 1px solid #dedede;
         display: flex;
         flex-direction: column;
     }
@@ -256,7 +277,7 @@
     /* Product Image */
     .product-image {
         position: relative;
-        background: #fcf8f0;
+        background: #f7f7f4;
         padding: 20px;
         text-align: center;
         height: 260px;
@@ -312,24 +333,24 @@
         margin-bottom: 8px;
     }
     .badge-scented {
-        background: #f3e8d8;
-        color: #8b6f47;
+        background: #eaffea;
+        color: #00b800;
         padding: 2px 12px;
         border-radius: 20px;
         font-size: 0.75rem;
         font-weight: 600;
     }
     .badge-unscented {
-        background: #e8f0e8;
-        color: #4a6e4a;
+        background: #eaffea;
+        color: #00b800;
         padding: 2px 12px;
         border-radius: 20px;
         font-size: 0.75rem;
         font-weight: 600;
     }
     .badge-intimate {
-        background: #f0e8f0;
-        color: #6e4a6e;
+        background: #f0f0f0;
+        color: #555555;
         padding: 2px 12px;
         border-radius: 20px;
         font-size: 0.75rem;
@@ -338,19 +359,19 @@
 
     .product-info h3 {
         font-size: 1.15rem;
-        color: #1f2a1f;
+        color: #080808;
         margin: 4px 0 8px;
     }
     .product-info h3 a {
-        color: #1f2a1f;
+        color: #080808;
         text-decoration: none;
     }
     .product-info h3 a:hover {
-        color: #8b6f47;
+        color: #00b800;
     }
 
     .product-description {
-        color: #5a6e5a;
+        color: #666666;
         font-size: 0.9rem;
         flex: 1;
         margin: 4px 0 12px;
@@ -364,7 +385,7 @@
     .price {
         font-size: 1.3rem;
         font-weight: 700;
-        color: #2e3b2e;
+        color: var(--brand-green-dark);
     }
     .sale-price {
         font-size: 1.3rem;
@@ -388,7 +409,7 @@
         letter-spacing: 2px;
     }
     .review-count {
-        color: #5a6e5a;
+        color: #666666;
         margin-left: 6px;
     }
     .no-reviews {
@@ -404,8 +425,8 @@
     .btn-add-to-cart {
         width: 100%;
         padding: 12px;
-        background: #2e3b2e;
-        color: #f5efe6;
+        background: #080808;
+        color: #ffffff;
         border: none;
         border-radius: 8px;
         font-weight: 600;
@@ -414,12 +435,13 @@
         transition: background 0.3s ease;
     }
     .btn-add-to-cart:hover {
-        background: #4a5e4a;
+        background: var(--brand-black);
+        color: var(--brand-white);
     }
     .btn-out-of-stock {
         width: 100%;
         padding: 12px;
-        background: #e0d8d0;
+        background: #d9d9d9;
         color: #999;
         border: none;
         border-radius: 8px;
@@ -432,7 +454,7 @@
     .no-products {
         text-align: center;
         padding: 60px 20px;
-        color: #5a6e5a;
+        color: #666666;
         grid-column: 1 / -1;
     }
 
@@ -447,26 +469,26 @@
         align-items: center;
     }
     .pagination a {
-        color: #2e3b2e;
+        color: #080808;
         padding: 8px 16px;
-        background: #f5efe6;
+        background: #f1f1ee;
         border-radius: 6px;
         text-decoration: none;
         transition: background 0.3s;
     }
     .pagination a:hover {
-        background: #d4cdc0;
+        background: #c8c8c8;
     }
     .pagination .current {
         padding: 8px 16px;
-        background: #2e3b2e;
-        color: #f5efe6;
+        background: #080808;
+        color: #ffffff;
         border-radius: 6px;
     }
 
     /* ===== NEWSLETTER SECTION ===== */
     .newsletter-section {
-        background: linear-gradient(135deg, #e8dfd0, #d4c9b8);
+        background: linear-gradient(135deg, var(--brand-black), #173317);
         padding: 50px 20px;
         border-radius: 20px;
         margin: 40px 0 60px;
@@ -474,11 +496,11 @@
     }
     .newsletter-content h2 {
         font-size: 2rem;
-        color: #1f2a1f;
+        color: var(--brand-white);
         margin-bottom: 10px;
     }
     .newsletter-content p {
-        color: #2e3b2e;
+        color: var(--brand-silver);
         font-size: 1.1rem;
         margin-bottom: 20px;
     }
@@ -494,18 +516,18 @@
         flex: 1;
         min-width: 200px;
         padding: 14px 20px;
-        border: 2px solid #d4cdc0;
+        border: 2px solid #c8c8c8;
         border-radius: 10px;
         font-size: 1rem;
         outline: none;
     }
     .newsletter-form input:focus {
-        border-color: #8b6f47;
+        border-color: #00b800;
     }
     .btn-subscribe {
         padding: 14px 30px;
-        background: #2e3b2e;
-        color: #f5efe6;
+        background: #080808;
+        color: #ffffff;
         border: none;
         border-radius: 10px;
         font-weight: 600;
@@ -514,7 +536,7 @@
         transition: background 0.3s;
     }
     .btn-subscribe:hover {
-        background: #4a5e4a;
+        background: #00b800;
     }
 
     /* ===== RESPONSIVE ===== */
@@ -579,11 +601,11 @@
                 
                 // Store original text
                 const originalText = this.textContent;
-                const originalBg = this.style.background || '#2e3b2e';
+                const originalBg = this.style.background || '#080808';
                 
                 // Show loading state
                 this.textContent = '⏳ Adding...';
-                this.style.background = '#6a8e6a';
+                this.style.background = '#4d8f4d';
                 this.disabled = true;
                 
                 // Send AJAX request
@@ -599,7 +621,7 @@
                     if (data.success) {
                         // Success feedback
                         this.textContent = '✅ Added!';
-                        this.style.background = '#4a6e4a';
+                        this.style.background = '#00b800';
                         
                         // Update cart count in header
                         const cartCount = document.querySelector('.cart-count');
@@ -676,8 +698,8 @@
                 bottom: 30px;
                 left: 50%;
                 transform: translateX(-50%) translateY(100px);
-                background: #2e3b2e;
-                color: #f5efe6;
+                background: #080808;
+                color: #ffffff;
                 padding: 16px 32px;
                 border-radius: 12px;
                 font-weight: 600;
